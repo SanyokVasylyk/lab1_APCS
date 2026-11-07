@@ -1,0 +1,28 @@
+name: Rust CI
+
+on:
+  push:
+    branches: [develop, master]
+  pull_request:
+    branches: [develop, master]
+
+jobs:
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Unix CI script
+        if: runner.os != 'Windows'
+        run: bash ci.sh
+      - name: Run Windows CI script
+        if: runner.os == 'Windows'
+        run: ci.bat
+        shell: cmd
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hello-${{ matrix.os }}
+          path: build/
