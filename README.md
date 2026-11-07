@@ -34,4 +34,7 @@
 
 ## Запуск зібраного проєкту
 
-Буде додано після виконання `/init` (див. docs/usage.md).
+- Windows: `.\ci.bat`, потім `.\build\hello.exe`.
+- Linux та macOS: `bash ci.sh`, потім `./build/hello`.
+
+Детальніше: [docs/usage.md](docs/usage.md).
